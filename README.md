@@ -11,13 +11,8 @@ Recursively clean temporary and junk files from directories.
 ## Installation
 
 ```bash
-ln -s /path/to/cln /usr/local/bin/cln
-
-# Bash completion (optional)
-cp cln.bash_completion /etc/bash_completion.d/cln
-
-# Man page (optional)
-cp cln.1 /usr/local/share/man/man1/
+make install          # installs cln, man page, and bash completion
+make uninstall        # removes installed files
 ```
 
 ## Usage
