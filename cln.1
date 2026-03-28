@@ -1,4 +1,4 @@
-.TH CLN 1 "January 2026" "cln 1.1.0" "User Commands"
+.TH CLN 1 "March 2026" "cln 1.1.0" "User Commands"
 .SH NAME
 cln \- recursively clean temporary and junk files from directories
 .SH SYNOPSIS
@@ -49,7 +49,7 @@ Prompt before deleting files. This is the default behavior.
 Delete files without prompting.
 .TP
 .BR \-v ", " \-\-verbose
-Increase output verbosity. Use twice for debug output (shows find expressions).
+Increase output verbosity (up to 3 levels). Level 2 shows find expressions.
 .TP
 .BR \-q ", " \-\-quiet
 Suppress all output.
@@ -98,15 +98,23 @@ Clean multiple directories:
 Replace default patterns entirely:
 .B cln \-S \(aq*.tmp,*.old\(aq /tmp
 .SH FILES
+Configuration files contain one pattern per line. Lines starting with # are
+comments. The first file found is used:
 .TP
-.I ~/.local/etc/default/cln
-User configuration file. One pattern per line. Comments start with #.
+.I $XDG_CONFIG_HOME/cln/cln.conf
+User configuration (defaults to \fI~/.config/cln/cln.conf\fR).
+.TP
+.I /etc/cln/cln.conf
+System configuration.
+.TP
+.I /etc/cln.conf
+System configuration (flat).
 .TP
 .I /etc/default/cln
-System-wide configuration file. Used if user config does not exist.
+System default configuration.
 .TP
-.I ~/.bashrc
-Can be used to create aliases for common cln invocations.
+.I /usr/local/etc/cln/cln.conf
+Local install configuration.
 .SH NOTES
 When prompted, respond with:
 .TP
@@ -121,4 +129,4 @@ Skip this directory
 .SH AUTHOR
 Written for the Okusi Associates scripts collection.
 .SH BUGS
-Report bugs at the project repository.
+Report bugs at https://github.com/OkusiAssociates/cln/issues

@@ -67,6 +67,7 @@ The following filespecs are removed by default:
 Config files (first found wins):
   \$XDG_CONFIG_HOME/cln/cln.conf  (user override, default ~/.config)
   /etc/cln/cln.conf               (system config)
+  /etc/cln.conf                   (system config, flat)
   /etc/default/cln                (system default)
   /usr/local/etc/cln/cln.conf     (local install)
 
@@ -111,6 +112,7 @@ read_conf() {
   local -a search_paths=(
     "${XDG_CONFIG_HOME:-$HOME/.config}/cln/cln.conf"
     /etc/cln/cln.conf
+    /etc/cln.conf
     /etc/default/cln
     /usr/local/etc/cln/cln.conf
   )

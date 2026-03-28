@@ -12,6 +12,12 @@ Recursively clean temporary and junk files from directories.
 
 ```bash
 ln -s /path/to/cln /usr/local/bin/cln
+
+# Bash completion (optional)
+cp cln.bash_completion /etc/bash_completion.d/cln
+
+# Man page (optional)
+cp cln.1 /usr/local/share/man/man1/
 ```
 
 ## Usage
@@ -43,37 +49,42 @@ cln -P dir1 dir2 dir3
 
 | Option | Description |
 |--------|-------------|
-| `-h` | Show help |
-| `-V` | Show version |
-| `-p`, `-n` | Prompt before deleting (default) |
-| `-P`, `-N` | Delete without prompting |
-| `-v` | Increase verbosity |
-| `-q` | Suppress output |
-| `-m N` | Max depth (-1 = unlimited, default: 3) |
-| `-a SPEC` | Add file patterns (comma-separated) |
-| `-S SPEC` | Set/replace all patterns (overrides config) |
+| `-h`, `--help` | Show help |
+| `-V`, `--version` | Show version |
+| `-p`, `-n`, `--prompt` | Prompt before deleting (default) |
+| `-P`, `-N`, `--no-prompt` | Delete without prompting |
+| `-v`, `--verbose` | Increase verbosity (up to 3 levels) |
+| `-q`, `--quiet` | Suppress output |
+| `-m N`, `--depth N` | Max depth (-1 = unlimited, default: 3) |
+| `-a SPEC`, `--add SPEC` | Add file patterns (comma-separated) |
+| `-S SPEC`, `--set SPEC` | Set/replace all patterns (overrides config) |
 | `-L` | Follow symbolic links |
 
 ## Configuration
 
-Patterns can be customized via config files (one pattern per line, `#` for comments):
+Patterns can be customized via config files (one pattern per line, `#` for comments).
+
+Search order (first found wins):
 
 | File | Purpose |
 |------|---------|
-| `~/.local/etc/default/cln` | User override |
+| `$XDG_CONFIG_HOME/cln/cln.conf` | User override (default `~/.config`) |
+| `/etc/cln/cln.conf` | System config |
+| `/etc/cln.conf` | System config (flat) |
 | `/etc/default/cln` | System default |
+| `/usr/local/etc/cln/cln.conf` | Local install |
 
-First existing file wins. Command-line `-S` overrides config.
+Command-line `-S` overrides config.
 
 ## Testing
 
 ```bash
-./tests/run-all-tests.sh
+bash tests/run-all-tests.sh
 ```
 
 ## Requirements
 
 - Bash 5.2+
-- GNU findutils (find), GNU coreutils (rm)
+- GNU findutils (`find`), GNU coreutils (`rm`)
 
 #fin
